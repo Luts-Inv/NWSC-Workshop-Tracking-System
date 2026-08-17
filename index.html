@@ -383,6 +383,17 @@ SCAN ANOTHER PUMP
 let scanner = null;
 let scannerRunning = false;
 
+const GITHUB_OWNER = "Luts-Inv";
+const GITHUB_REPO = "NWSC-Workshop-Tracking-System";
+const GITHUB_BRANCH = "main";
+const PUMPS_FILE = "pumps.json";
+
+const GITHUB_API =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${PUMPS_FILE}`;
+
+const GITHUB_RAW =
+    `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${PUMPS_FILE}`;
+
 
 /* -------------------------
    UNIQUE RECORD ID
@@ -764,6 +775,108 @@ async function qrSuccess(decodedText){
 
 }
 
+async function savePumpToGitHub(pumpData) {
+
+    const token = prompt(
+        "Enter your GitHub Personal Access Token:\n\n" +
+        "This is required to save the pump record to GitHub."
+    );
+
+    if (!token) {
+        throw new Error("GitHub token was not provided.");
+    }
+
+    // Get current pumps.json
+    const getResponse = await fetch(
+        `${GITHUB_API}?ref=${GITHUB_BRANCH}`,
+        {
+            headers: {
+                "Accept": "application/vnd.github+json",
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    if (!getResponse.ok) {
+        throw new Error(
+            "Unable to access pumps.json. Check your GitHub token."
+        );
+    }
+
+    const fileData = await getResponse.json();
+
+    // Decode GitHub's Base64 content
+    const currentContent = decodeURIComponent(
+        escape(
+            atob(fileData.content.replace(/\n/g, ""))
+        )
+    );
+
+    let pumps = [];
+
+    try {
+        pumps = JSON.parse(currentContent);
+    } catch (error) {
+        throw new Error("pumps.json contains invalid JSON.");
+    }
+
+    if (!Array.isArray(pumps)) {
+        throw new Error("pumps.json must contain an array.");
+    }
+
+    // Prevent duplicate Record IDs
+    const duplicate = pumps.some(
+        pump => pump.recordId === pumpData.recordId
+    );
+
+    if (duplicate) {
+        throw new Error(
+            `Record ID ${pumpData.recordId} already exists.`
+        );
+    }
+
+    // Add new pump
+    pumps.push(pumpData);
+
+    // Convert back to JSON
+    const newContent = btoa(
+        unescape(
+            encodeURIComponent(
+                JSON.stringify(pumps, null, 2)
+            )
+        )
+    );
+
+    // Write back to GitHub
+    const updateResponse = await fetch(GITHUB_API, {
+        method: "PUT",
+
+        headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            message: `Add pump ${pumpData.recordId}`,
+            content: newContent,
+            sha: fileData.sha,
+            branch: GITHUB_BRANCH
+        })
+    });
+
+    if (!updateResponse.ok) {
+
+        const errorData = await updateResponse.json();
+
+        throw new Error(
+            errorData.message ||
+            "GitHub failed to save the pump record."
+        );
+    }
+
+    return true;
+}
 
 /* -------------------------
    DISPLAY PUMP
