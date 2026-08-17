@@ -399,21 +399,18 @@ const GITHUB_RAW =
    UNIQUE RECORD ID
 ------------------------- */
 
-function generateRecordId(){
+function generateRecordId() {
 
     const station =
-        document.getElementById("station").value
+        (document.getElementById("station").value || "GEN")
         .trim()
         .toUpperCase()
-        .replace(/[^A-Z0-9]/g,"")
-        .substring(0,5) || "GEN";
+        .replace(/[^A-Z0-9]/g, "")
+        .substring(0, 5) || "GEN";
 
-    const time = Date.now();
+    const timestamp = Date.now();
 
-    const random =
-        Math.floor(1000 + Math.random()*9000);
-
-    return `NWSC-${station}-P-${time}-${random}`;
+    return `NWSC-${station}-P-${timestamp}`;
 }
 
 
@@ -438,58 +435,26 @@ window.onload=function(){
 
 function collectPumpData(){
 
-    return {
-
-        recordId:
-            document.getElementById("recordId").value,
-
-        entryDate:
-            document.getElementById("entryDate").value,
-
-        assetNumber:
-            document.getElementById("assetNumber").value.trim(),
-
-        serialNumber:
-            document.getElementById("serialNumber").value.trim(),
-
-        pumpManufacturer:
-            document.getElementById("pumpManufacturer").value.trim(),
-
-        pumpModel:
-            document.getElementById("pumpModel").value.trim(),
-
-        pumpType:
-            document.getElementById("pumpType").value,
-
-        pumpCapacity:
-            document.getElementById("pumpCapacity").value,
-
-        motorRating:
-            document.getElementById("motorRating").value,
-
-        motorSerialNumber:
-            document.getElementById("motorSerialNumber").value.trim(),
-
-        station:
-            document.getElementById("station").value.trim(),
-
-        location:
-            document.getElementById("location").value.trim(),
-
-        deliveredBy:
-            document.getElementById("deliveredBy").value.trim(),
-
-        dateReceived:
-            document.getElementById("dateReceived").value,
-
-        faultReported:
-            document.getElementById("faultReported").value.trim(),
-
-        condition:
-            document.getElementById("condition").value
-
-    };
-
+   
+return {
+    action: "save",
+    recordId: recordId,
+    entryDate: document.getElementById("entry-date").value,
+    assetNumber: document.getElementById("asset-num").value.trim(),
+    serialNumber: document.getElementById("serial-num").value.trim(),
+    pumpManufacturer: document.getElementById("pump-man").value.trim(),
+    pumpModel: document.getElementById("pump-model").value.trim(),
+    pumpType: document.getElementById("pump-type").value,
+    pumpCapacity: document.getElementById("pump-cap").value,
+    motorRating: document.getElementById("motor-rate").value,
+    motorSerialNumber: document.getElementById("motor-serial").value.trim(),
+    station: document.getElementById("station").value.trim(),
+    location: document.getElementById("location").value.trim(),
+    deliveredBy: document.getElementById("delivered-by").value.trim(),
+    dateReceived: document.getElementById("date-received").value,
+    faultReported: document.getElementById("fault-reported").value.trim(),
+    condition: document.getElementById("condition").value
+};
 }
 
 
