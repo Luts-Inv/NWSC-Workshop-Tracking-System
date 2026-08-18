@@ -53,5 +53,23 @@
     "dateReceived": "2026-07-01",
     "faultReported": "Shaft misalignment",
     "condition": "Under Repair"
+  },
+  {
+    "recordId": "NWSC-BUGOL-P-0",
+    "entryDate": "2026-08-13",
+    "assetNumber": "003",
+    "serialNumber": "SN1245",
+    "pumpManufacturer": "Grundfos",
+    "pumpModel": "2536",
+    "pumpType": "Other",
+    "pumpCapacity": "96",
+    "motorRating": "15",
+    "motorSerialNumber": "36478",
+    "station": "Bugolobi",
+    "location": "pump house",
+    "deliveredBy": "Shawn",
+    "dateReceived": "2026-08-13",
+    "faultReported": "Impeller",
+    "condition": "Under Repair"
   }
 ]
