@@ -687,7 +687,7 @@ function generateRecordId(){
         0;
 
 
-    return `NWSC-${station}-P-${number}`;
+    return `NWSC-${station}-P-${string(number).padStart(4, '0')}`;
 
 }
 
