@@ -1921,7 +1921,316 @@ function escapeHTML(value){
         );
 
 }
+/* =========================================================
+   DATABASE
+========================================================= */
 
+let pumpDatabase = [];
+
+
+/* -------------------------
+   SHOW DATABASE
+------------------------- */
+
+async function showDatabase() {
+
+    await stopScanner();
+
+    document.getElementById("registerSection").style.display = "none";
+
+    document.getElementById("scan-section").style.display = "none";
+
+    document.getElementById("database-section").style.display = "block";
+
+    document.getElementById("registerTab").classList.remove("active");
+
+    document.getElementById("scanTab").classList.remove("active");
+
+    document.getElementById("databaseTab").classList.add("active");
+
+    await loadDatabase();
+}
+
+
+/* -------------------------
+   LOAD DATABASE
+------------------------- */
+
+async function loadDatabase() {
+
+    const status =
+        document.getElementById("databaseStatus");
+
+    const table =
+        document.getElementById("databaseTable");
+
+    status.textContent = "Loading database...";
+
+    try {
+
+        const response = await fetch(
+            GITHUB_RAW + "?t=" + Date.now()
+        );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Could not access pumps.json."
+            );
+        }
+
+        pumpDatabase = await response.json();
+
+        if (!Array.isArray(pumpDatabase)) {
+
+            throw new Error(
+                "pumps.json is not an array."
+            );
+        }
+
+        status.textContent =
+            pumpDatabase.length +
+            " pump record(s) found.";
+
+        displayDatabase(pumpDatabase);
+
+    } catch (error) {
+
+        console.error(
+            "DATABASE ERROR:",
+            error
+        );
+
+        status.textContent =
+            "Database error: " +
+            error.message;
+
+        table.innerHTML = "";
+    }
+}
+
+
+/* -------------------------
+   DISPLAY DATABASE
+------------------------- */
+
+function displayDatabase(records) {
+
+    const table =
+        document.getElementById("databaseTable");
+
+    if (records.length === 0) {
+
+        table.innerHTML =
+            "<p>No pump records found.</p>";
+
+        return;
+    }
+
+
+    let html = `
+
+        <table style="
+            width:100%;
+            border-collapse:collapse;
+            font-size:13px;
+        ">
+
+            <thead>
+
+                <tr style="
+                    background:#1d4ed8;
+                    color:white;
+                ">
+
+                    <th style="padding:10px;text-align:left;">
+                        Record ID
+                    </th>
+
+                    <th style="padding:10px;text-align:left;">
+                        Asset Number
+                    </th>
+
+                    <th style="padding:10px;text-align:left;">
+                        Serial Number
+                    </th>
+
+                    <th style="padding:10px;text-align:left;">
+                        Station
+                    </th>
+
+                    <th style="padding:10px;text-align:left;">
+                        Condition
+                    </th>
+
+                    <th style="padding:10px;">
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+    `;
+
+
+    records.forEach((pump, index) => {
+
+        html += `
+
+            <tr style="
+                border-bottom:1px solid #d1d5db;
+            ">
+
+                <td style="padding:10px;">
+                    ${escapeHTML(pump.recordId || "—")}
+                </td>
+
+                <td style="padding:10px;">
+                    ${escapeHTML(pump.assetNumber || "—")}
+                </td>
+
+                <td style="padding:10px;">
+                    ${escapeHTML(pump.serialNumber || "—")}
+                </td>
+
+                <td style="padding:10px;">
+                    ${escapeHTML(pump.station || "—")}
+                </td>
+
+                <td style="padding:10px;">
+                    ${escapeHTML(pump.condition || "—")}
+                </td>
+
+                <td style="padding:10px;">
+
+                    <button
+                        onclick="viewPump(${index})"
+                        style="
+                            background:#1d4ed8;
+                            color:white;
+                            border:0;
+                            padding:7px 12px;
+                            border-radius:5px;
+                            cursor:pointer;
+                        "
+                    >
+                        VIEW
+                    </button>
+
+                </td>
+
+            </tr>
+        `;
+    });
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+    `;
+
+
+    table.innerHTML = html;
+}
+
+
+/* -------------------------
+   SEARCH DATABASE
+------------------------- */
+
+function filterDatabase() {
+
+    const search =
+        document
+        .getElementById("databaseSearch")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if (!search) {
+
+        displayDatabase(pumpDatabase);
+
+        return;
+    }
+
+
+    const filtered =
+        pumpDatabase.filter(pump => {
+
+            return (
+
+                String(pump.recordId || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(pump.assetNumber || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(pump.serialNumber || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(pump.station || "")
+                    .toLowerCase()
+                    .includes(search)
+
+            );
+
+        });
+
+
+    displayDatabase(filtered);
+}
+
+
+/* -------------------------
+   VIEW PUMP
+------------------------- */
+
+function viewPump(index) {
+
+    const pump =
+        pumpDatabase[index];
+
+    if (!pump) {
+
+        alert("Pump record not found.");
+
+        return;
+    }
+
+
+    displayPump(pump);
+
+    document.getElementById(
+        "database-section"
+    ).style.display = "none";
+
+    document.getElementById(
+        "scan-section"
+    ).style.display = "block";
+
+    document.getElementById(
+        "databaseTab"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "scanTab"
+    ).classList.add("active");
+}
 </script>
 
 </body>
