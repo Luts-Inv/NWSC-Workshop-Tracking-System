@@ -1,6 +1,5 @@
-
 [
-   {
+  {
     "action": "save",
     "recordId": "NWSC-LUGOG-P-1755438214567",
     "entryDate": "2026-08-17",
@@ -18,5 +17,23 @@
     "dateReceived": "2026-07-31",
     "faultReported": "bearing",
     "condition": "Out of Service"
+  },
+  {
+    "recordId": "NWSC-BANDA-P-1787053824865",
+    "entryDate": "2026-08-18",
+    "assetNumber": "02",
+    "serialNumber": "sn39485",
+    "pumpManufacturer": "Grundfos",
+    "pumpModel": "cr4",
+    "pumpType": "Centrifugal",
+    "pumpCapacity": "70",
+    "motorRating": "18",
+    "motorSerialNumber": "qu2837",
+    "station": "Banda",
+    "location": "Treatment",
+    "deliveredBy": "scof",
+    "dateReceived": "2026-08-18",
+    "faultReported": "gasket",
+    "condition": "In Service"
   }
 ]
