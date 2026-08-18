@@ -431,29 +431,59 @@ window.onload=function(){
 /* -------------------------
    COLLECT ALL DATA
 ------------------------- */
+function collectPumpData() {
 
-function collectPumpData(){
+    const recordId =
+        document.getElementById("recordId").value.trim();
 
-   
-return {
-    action: "save",
-    recordId: recordId,
-    entryDate: document.getElementById("entry-date").value,
-    assetNumber: document.getElementById("asset-num").value.trim(),
-    serialNumber: document.getElementById("serial-num").value.trim(),
-    pumpManufacturer: document.getElementById("pump-man").value.trim(),
-    pumpModel: document.getElementById("pump-model").value.trim(),
-    pumpType: document.getElementById("pump-type").value,
-    pumpCapacity: document.getElementById("pump-cap").value,
-    motorRating: document.getElementById("motor-rate").value,
-    motorSerialNumber: document.getElementById("motor-serial").value.trim(),
-    station: document.getElementById("station").value.trim(),
-    location: document.getElementById("location").value.trim(),
-    deliveredBy: document.getElementById("delivered-by").value.trim(),
-    dateReceived: document.getElementById("date-received").value,
-    faultReported: document.getElementById("fault-reported").value.trim(),
-    condition: document.getElementById("condition").value
-};
+    return {
+        recordId: recordId,
+
+        entryDate:
+            document.getElementById("entryDate").value,
+
+        assetNumber:
+            document.getElementById("assetNumber").value.trim(),
+
+        serialNumber:
+            document.getElementById("serialNumber").value.trim(),
+
+        pumpManufacturer:
+            document.getElementById("pumpManufacturer").value.trim(),
+
+        pumpModel:
+            document.getElementById("pumpModel").value.trim(),
+
+        pumpType:
+            document.getElementById("pumpType").value,
+
+        pumpCapacity:
+            document.getElementById("pumpCapacity").value,
+
+        motorRating:
+            document.getElementById("motorRating").value,
+
+        motorSerialNumber:
+            document.getElementById("motorSerialNumber").value.trim(),
+
+        station:
+            document.getElementById("station").value.trim(),
+
+        location:
+            document.getElementById("location").value.trim(),
+
+        deliveredBy:
+            document.getElementById("deliveredBy").value.trim(),
+
+        dateReceived:
+            document.getElementById("dateReceived").value,
+
+        faultReported:
+            document.getElementById("faultReported").value.trim(),
+
+        condition:
+            document.getElementById("condition").value
+    };
 }
 
 
@@ -494,67 +524,77 @@ function validate(data){
    CREATE QR
 ------------------------- */
 
-function generatePumpQR(){
+function generatePumpQR() {
 
-    const recordId=generateRecordId();
+    // Generate a unique ID
+    const recordId = generateRecordId();
 
-    document.getElementById("recordId").value=recordId;
+    document.getElementById("recordId").value = recordId;
 
-    const data=collectPumpData();
+    // Collect all pump information
+    const data = collectPumpData();
 
-    if(!validate(data)) return;
+    // Validate
+    if (!validate(data)) {
+        return;
+    }
 
+    // Make sure QR library loaded
+    if (typeof QRCode === "undefined") {
+        alert(
+            "QR generator library did not load.\n\n" +
+            "Please check your internet connection and reload the page."
+        );
+        return;
+    }
 
-    /*
-       IMPORTANT:
-       The complete pump record is stored
-       inside this QR.
-    */
+    // Convert ALL pump information into QR data
+    const jsonData = JSON.stringify(data);
 
-    const payload=
-        "NWSC_PUMP:"+
+    const payload =
+        "NWSC_PUMP:" +
         btoa(
             unescape(
-                encodeURIComponent(
-                    JSON.stringify(data)
-                )
+                encodeURIComponent(jsonData)
             )
         );
 
+    // Clear previous QR
+    const qr = document.getElementById("qr-code");
+    qr.innerHTML = "";
 
-    const qr=document.getElementById("qr-code");
+    try {
 
-    qr.innerHTML="";
+        new QRCode(qr, {
+            text: payload,
+            width: 280,
+            height: 280,
+            correctLevel: QRCode.CorrectLevel.H
+        });
 
+        // Display record ID
+        document.getElementById("qr-record-id").textContent =
+            recordId;
 
-    new QRCode(qr,{
+        // Show QR section
+        document.getElementById("qr-section").style.display =
+            "block";
 
-        text:payload,
+        // Scroll to QR
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
 
-        width:280,
+    } catch (error) {
 
-        height:280,
+        console.error("QR ERROR:", error);
 
-        correctLevel:QRCode.CorrectLevel.H
-
-    });
-
-
-    document.getElementById(
-        "qr-record-id"
-    ).textContent=recordId;
-
-
-    document.getElementById(
-        "qr-section"
-    ).style.display="block";
-
-
-    window.scrollTo({
-        top:document.body.scrollHeight,
-        behavior:"smooth"
-    });
-
+        alert(
+            "QR generation failed:\n\n" +
+            error.message
+        );
+    }
 }
 
 function showQrCode(recordId) {
