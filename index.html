@@ -557,7 +557,53 @@ function generatePumpQR(){
 
 }
 
+function showQrCode(recordId) {
+    const box = document.getElementById('qr-output-container');
+    const qr = document.getElementById('qr-code');
+    const title = document.getElementById('qr-title-label');
+    const status = document.getElementById('cloud-status');
 
+    qr.innerHTML = '';
+
+    // Check whether QRCode.js loaded
+    if (typeof QRCode === 'undefined') {
+        status.textContent =
+            'QR generator failed to load. Please check your internet connection and reload the page.';
+        status.style.color = '#b91c1c';
+        box.style.display = 'flex';
+        return;
+    }
+
+    try {
+        const payload = buildQrPayload(recordId);
+
+        new QRCode(qr, {
+            text: payload,
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        title.textContent = 'Asset QR: ' + recordId;
+
+        status.textContent = '✓ QR code generated successfully.';
+        status.style.color = '#15803d';
+
+        box.style.display = 'flex';
+
+    } catch (error) {
+        console.error('QR generation error:', error);
+
+        status.textContent =
+            'QR generation failed: ' + error.message;
+
+        status.style.color = '#b91c1c';
+
+        box.style.display = 'flex';
+    }
+}
 /* -------------------------
    SWITCH TO REGISTER
 ------------------------- */
