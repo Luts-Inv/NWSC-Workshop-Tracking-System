@@ -407,9 +407,9 @@ function generateRecordId() {
         .replace(/[^A-Z0-9]/g, "")
         .substring(0, 5) || "GEN";
 
-    const timestamp = Date.now();
+    const number = 0;
 
-    return `NWSC-${station}-P-${timestamp}`;
+    return `NWSC-${station}-P-${String(number).padStart(4, '0')}`;
 }
 
 
