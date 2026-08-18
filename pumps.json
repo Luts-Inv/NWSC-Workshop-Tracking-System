@@ -1,21 +1,22 @@
 
 [
-  {
-    "recordId": "NWSC-GG-P-0001",
+   {
+    "action": "save",
+    "recordId": "NWSC-LUGOG-P-1755438214567",
     "entryDate": "2026-08-17",
-    "assetNumber": "127R2",
-    "serialNumber": "SN88404",
+    "assetNumber": "1123",
+    "serialNumber": "sn2672",
     "pumpManufacturer": "Grundfos",
-    "pumpModel": "200250",
+    "pumpModel": "563",
     "pumpType": "Centrifugal",
-    "pumpCapacity": "50",
-    "motorRating": "15",
-    "motorSerialNumber": "2225682",
-    "station": "Ggaba",
-    "location": "Booster Plant",
-    "deliveredBy": "Jorem",
-    "dateReceived": "2026-08-17",
-    "faultReported": "None",
-    "condition": "Good"
+    "pumpCapacity": "23",
+    "motorRating": "23",
+    "motorSerialNumber": "1254",
+    "station": "Lugogo",
+    "location": "Booster",
+    "deliveredBy": "Amidi",
+    "dateReceived": "2026-07-31",
+    "faultReported": "bearing",
+    "condition": "Out of Service"
   }
 ]
