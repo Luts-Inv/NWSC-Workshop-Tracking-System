@@ -608,7 +608,8 @@ QR contains ALL pump information
 
 
 <script>
-
+let scanner = null;
+let scannerRunning = false;
 /* =========================================================
    GLOBAL VARIABLES
 ========================================================= */
@@ -635,7 +636,16 @@ const PUMPS_FILE = "pumps.json";
 const GITHUB_API =
     `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${PUMPS_FILE}`;
 
+const GITHUB_OWNER = "Luts-Inv";
+const GITHUB_REPO = "NWSC-Workshop-Tracking-System";
+const GITHUB_BRANCH = "main";
+const PUMPS_FILE = "pumps.json";
 
+const GITHUB_API =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${PUMPS_FILE}`;
+
+const GITHUB_RAW =
+    `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${PUMPS_FILE}`;
 /* =========================================================
    PAGE LOAD
 ========================================================= */
