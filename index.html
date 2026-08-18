@@ -401,11 +401,11 @@ const GITHUB_RAW =
 function generateRecordId() {
 
     const station =
-        (document.getElementById("station").value || "GEN")
+        (document.getElementById("station").value || 'GEN')
         .trim()
         .toUpperCase()
-        .replace(/[^A-Z0-9]/g, "")
-        .substring(0, 5) || "GEN";
+        .replace(/[^A-Z0-9]/g, '')
+        .substring(0, 5) || 'GEN';
 
     const number = 0;
 
