@@ -266,7 +266,9 @@ button.main:disabled{
     REGISTER PUMP
 
 </button>
-
+<button id="databaseTab" class="tab" onclick="showDatabase()">
+        DATABASE
+    </button>
 
 <button
     id="scanTab"
@@ -543,7 +545,32 @@ QR contains ALL pump information
 
 </div>
 
+<!-- DATABASE -->
 
+<div id="database-section" style="display:none;">
+
+    <h2 style="margin-bottom:15px;color:#1d4ed8;">
+        PUMP DATABASE
+    </h2>
+
+    <input
+        type="text"
+        id="databaseSearch"
+        placeholder="Search Record ID, Asset Number, Serial Number or Station..."
+        oninput="filterDatabase()"
+        style="margin-bottom:15px;"
+    >
+
+    <div id="databaseStatus"
+         style="margin-bottom:15px;font-weight:bold;">
+        Loading database...
+    </div>
+
+    <div id="databaseTable"
+         style="overflow-x:auto;">
+    </div>
+
+</div>
 
 <!-- =====================================================
      SCANNER SECTION
