@@ -399,17 +399,15 @@ const GITHUB_RAW =
 ------------------------- */
 
 function generateRecordId() {
-
-    const station =
-        (document.getElementById("station").value || 'GEN')
+    const station = (document.getElementById('station').value || 'GEN')
         .trim()
         .toUpperCase()
         .replace(/[^A-Z0-9]/g, '')
         .substring(0, 5) || 'GEN';
 
-    const number = 0;
+    const timePart = Date.now().toString().slice(-6);
 
-    return `NWSC-${station}-P-${String(number).padStart(4, '0')}`;
+    return `NWSC-${station}-P-${timePart}`;
 }
 
 
