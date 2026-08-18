@@ -35,5 +35,23 @@
     "dateReceived": "2026-08-18",
     "faultReported": "gasket",
     "condition": "In Service"
+  },
+  {
+    "recordId": "NWSC-GGABA-P-1787055334289",
+    "entryDate": "2026-08-01",
+    "assetNumber": "002",
+    "serialNumber": "SN1212",
+    "pumpManufacturer": "Alfa Laval",
+    "pumpModel": "1200",
+    "pumpType": "Submersible",
+    "pumpCapacity": "90",
+    "motorRating": "15",
+    "motorSerialNumber": "121209",
+    "station": "Ggaba",
+    "location": "Treatment area",
+    "deliveredBy": "Scof",
+    "dateReceived": "2026-07-01",
+    "faultReported": "Shaft misalignment",
+    "condition": "Under Repair"
   }
 ]
