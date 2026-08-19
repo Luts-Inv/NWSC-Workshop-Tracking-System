@@ -89,5 +89,23 @@
     "dateReceived": "2026-08-18",
     "faultReported": "89",
     "condition": "Under Repair"
+  },
+  {
+    "recordId": "NWSC-BWEYO-P-1787126626805",
+    "entryDate": "2026-08-19",
+    "assetNumber": "001",
+    "serialNumber": "SN20220",
+    "pumpManufacturer": "Grunfos",
+    "pumpModel": "p5860",
+    "pumpType": "Submersible",
+    "pumpCapacity": "90",
+    "motorRating": "20",
+    "motorSerialNumber": "1212345",
+    "station": "Bweyogere",
+    "location": "Pump house",
+    "deliveredBy": "Scof",
+    "dateReceived": "2026-08-19",
+    "faultReported": "Impeller damage",
+    "condition": "Under Repair"
   }
 ]
