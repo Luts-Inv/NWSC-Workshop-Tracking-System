@@ -27,6 +27,17 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .record-title{font-size:18px;font-weight:bold;margin-bottom:10px}
 .status{margin-top:10px;font-weight:bold}
 .secondary{background:#6b7280!important}
+#database-section{display:none}
+#database-toolbar{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;margin-bottom:15px}
+#database-toolbar button{padding:11px 14px;border:0;border-radius:6px;background:#1d4ed8;color:white;font-weight:bold;cursor:pointer}
+#database-count{margin:10px 0;font-weight:bold;color:#374151}
+#database-table-wrap{overflow-x:auto;border:1px solid #e5e7eb;border-radius:8px}
+#database-table{width:100%;border-collapse:collapse;font-size:12px}
+#database-table th{background:#1d4ed8;color:white;padding:10px;text-align:left;white-space:nowrap}
+#database-table td{padding:9px;border-bottom:1px solid #e5e7eb;white-space:nowrap}
+#database-table tr:hover{background:#eff6ff;cursor:pointer}
+#database-detail{display:none;margin-top:18px;background:#eff6ff;padding:18px;border-radius:8px;border:1px solid #bfdbfe}
+#database-detail h2{color:#1e3a8a;margin-bottom:15px;font-size:18px}
 #scan-section{display:none}
 #reader{width:100%;max-width:500px;margin:auto}
 .result{display:none;margin-top:20px;background:#eff6ff;padding:18px;border-radius:8px;border:1px solid #bfdbfe}
@@ -34,7 +45,13 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .row{display:flex;justify-content:space-between;gap:15px;padding:9px 0;border-bottom:1px solid #dbeafe}
 .row strong{color:#6b7280;font-size:12px}.row span{text-align:right;font-weight:bold}
 #message{display:none;margin-top:15px;padding:12px;border-radius:7px;font-weight:bold;text-align:center}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.row{flex-direction:column;gap:3px}.row span{text-align:left}.container{padding:15px}}
+@media(max-width:700px){
+.grid{grid-template-columns:1fr}
+.row{flex-direction:column;gap:3px}
+.row span{text-align:left}
+.container{padding:15px}
+#database-toolbar{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -42,6 +59,7 @@ button:disabled{opacity:.65;cursor:not-allowed}
 <h1>NWSC PUMP ASSET MANAGEMENT</h1>
 <div class="tabs">
 <button id="registerTab" class="tab active" onclick="showRegister()">REGISTER PUMP</button>
+<button id="databaseTab" class="tab" onclick="showDatabase()">DATABASE</button>
 <button id="scanTab" class="tab" onclick="showScanner()">SCAN PUMP QR</button>
 </div>
 <div id="message"></div>
@@ -75,6 +93,53 @@ button:disabled{opacity:.65;cursor:not-allowed}
 </div>
 </div>
 
+
+<div id="database-section">
+  <div id="database-toolbar">
+    <input id="databaseSearch" placeholder="Search pumps..." oninput="renderDatabase()">
+    <select id="databaseStation" onchange="renderDatabase()">
+      <option value="">All Stations</option>
+    </select>
+    <select id="databaseCondition" onchange="renderDatabase()">
+      <option value="">All Conditions</option>
+      <option>In Service</option>
+      <option>Out of Service</option>
+      <option>Under Maintenance</option>
+      <option>Under Repair</option>
+      <option>New</option>
+    </select>
+    <button onclick="loadDatabase()">REFRESH</button>
+  </div>
+
+  <div id="database-count">Loading database...</div>
+
+  <div id="database-table-wrap">
+    <table id="database-table">
+      <thead>
+        <tr>
+          <th>Record ID</th>
+          <th>Asset Number</th>
+          <th>Serial Number</th>
+          <th>Manufacturer</th>
+          <th>Model</th>
+          <th>Type</th>
+          <th>Station</th>
+          <th>Location</th>
+          <th>Condition</th>
+          <th>Entry Date</th>
+        </tr>
+      </thead>
+      <tbody id="database-body"></tbody>
+    </table>
+  </div>
+
+  <div id="database-detail">
+    <h2>PUMP SPECIFICATIONS</h2>
+    <div id="database-details"></div>
+    <button class="main secondary" onclick="closeDatabaseDetail()">CLOSE DETAILS</button>
+  </div>
+</div>
+
 <div id="scan-section">
 <div id="reader"></div>
 <div id="scan-result" class="result">
@@ -87,6 +152,7 @@ button:disabled{opacity:.65;cursor:not-allowed}
 
 <script>
 let scanner=null,scannerRunning=false;
+let databasePumps=[];
 const GITHUB_OWNER="Luts-Inv";
 const GITHUB_REPO="NWSC-Workshop-Tracking-System";
 const GITHUB_BRANCH="main";
@@ -203,17 +269,131 @@ function createPumpQR(data){
  document.getElementById("qr-section").scrollIntoView({behavior:"smooth"});
 }
 
+
+async function loadDatabase(){
+  const count=document.getElementById("database-count");
+  const body=document.getElementById("database-body");
+  count.textContent="Loading database...";
+  body.innerHTML="";
+  try{
+    const response=await fetch(GITHUB_RAW+"?t="+Date.now());
+    if(!response.ok)throw new Error("Could not read pumps.json from GitHub.");
+    const pumps=await response.json();
+    if(!Array.isArray(pumps))throw new Error("pumps.json is not a valid database.");
+    databasePumps=pumps;
+
+    const stationSelect=document.getElementById("databaseStation");
+    const currentStation=stationSelect.value;
+    const stations=[...new Set(pumps.map(p=>String(p.station||"").trim()).filter(Boolean))]
+      .sort((a,b)=>a.localeCompare(b));
+    stationSelect.innerHTML='<option value="">All Stations</option>'+
+      stations.map(s=>`<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`).join("");
+    if(stations.includes(currentStation))stationSelect.value=currentStation;
+
+    renderDatabase();
+    showMessage(`Database loaded: ${pumps.length} pump record(s).`,"success");
+  }catch(e){
+    console.error(e);
+    count.textContent="Database could not be loaded.";
+    showMessage("DATABASE ERROR: "+e.message);
+  }
+}
+
+function renderDatabase(){
+  const search=(document.getElementById("databaseSearch").value||"").trim().toLowerCase();
+  const station=document.getElementById("databaseStation").value;
+  const condition=document.getElementById("databaseCondition").value;
+  const body=document.getElementById("database-body");
+
+  const filtered=databasePumps.filter(p=>{
+    const searchable=[
+      p.recordId,p.assetNumber,p.serialNumber,p.pumpManufacturer,p.pumpModel,
+      p.pumpType,p.station,p.location,p.deliveredBy,p.faultReported,p.condition,
+      p.motorSerialNumber,p.entryDate,p.dateReceived
+    ].join(" ").toLowerCase();
+
+    return (!search||searchable.includes(search)) &&
+           (!station||String(p.station||"")===station) &&
+           (!condition||String(p.condition||"")===condition);
+  });
+
+  document.getElementById("database-count").textContent=
+    `Showing ${filtered.length} of ${databasePumps.length} pump record(s)`;
+
+  if(!filtered.length){
+    body.innerHTML='<tr><td colspan="10" style="text-align:center;padding:20px">No pump records found.</td></tr>';
+    return;
+  }
+
+  body.innerHTML=filtered.map((p,i)=>`
+    <tr onclick="showDatabasePump(${databasePumps.indexOf(p)})">
+      <td>${escapeHTML(p.recordId||"—")}</td>
+      <td>${escapeHTML(p.assetNumber||"—")}</td>
+      <td>${escapeHTML(p.serialNumber||"—")}</td>
+      <td>${escapeHTML(p.pumpManufacturer||"—")}</td>
+      <td>${escapeHTML(p.pumpModel||"—")}</td>
+      <td>${escapeHTML(p.pumpType||"—")}</td>
+      <td>${escapeHTML(p.station||"—")}</td>
+      <td>${escapeHTML(p.location||"—")}</td>
+      <td>${escapeHTML(p.condition||"—")}</td>
+      <td>${escapeHTML(p.entryDate||"—")}</td>
+    </tr>
+  `).join("");
+}
+
+function showDatabasePump(index){
+  const data=databasePumps[index];
+  if(!data)return;
+
+  const fields=[
+    ["Record ID",data.recordId],["Entry Date",data.entryDate],
+    ["NWSC Asset Number",data.assetNumber],["Serial Number",data.serialNumber],
+    ["Pump Manufacturer",data.pumpManufacturer],["Pump Model",data.pumpModel],
+    ["Pump Type",data.pumpType],["Pump Capacity (m³/h)",data.pumpCapacity],
+    ["Motor Rating (kW)",data.motorRating],["Motor Serial Number",data.motorSerialNumber],
+    ["Station",data.station],["Location / Installation Point",data.location],
+    ["Delivered By",data.deliveredBy],["Date Received",data.dateReceived],
+    ["Fault Reported",data.faultReported],["Condition",data.condition]
+  ];
+
+  document.getElementById("database-details").innerHTML=
+    fields.map(f=>`<div class="row"><strong>${escapeHTML(f[0])}</strong><span>${escapeHTML(String(f[1]||"—"))}</span></div>`).join("");
+
+  const detail=document.getElementById("database-detail");
+  detail.style.display="block";
+  detail.scrollIntoView({behavior:"smooth"});
+}
+
+function closeDatabaseDetail(){
+  document.getElementById("database-detail").style.display="none";
+}
+
+function showDatabase(){
+  stopScanner();
+  document.getElementById("registerSection").style.display="none";
+  document.getElementById("database-section").style.display="block";
+  document.getElementById("scan-section").style.display="none";
+  document.getElementById("registerTab").classList.remove("active");
+  document.getElementById("databaseTab").classList.add("active");
+  document.getElementById("scanTab").classList.remove("active");
+  loadDatabase();
+}
+
 function showRegister(){
  stopScanner();
  document.getElementById("registerSection").style.display="block";
+ document.getElementById("database-section").style.display="none";
  document.getElementById("scan-section").style.display="none";
  document.getElementById("registerTab").classList.add("active");
+ document.getElementById("databaseTab").classList.remove("active");
  document.getElementById("scanTab").classList.remove("active");
 }
 function showScanner(){
  document.getElementById("registerSection").style.display="none";
+ document.getElementById("database-section").style.display="none";
  document.getElementById("scan-section").style.display="block";
  document.getElementById("registerTab").classList.remove("active");
+ document.getElementById("databaseTab").classList.remove("active");
  document.getElementById("scanTab").classList.add("active");
  startScanner();
 }
