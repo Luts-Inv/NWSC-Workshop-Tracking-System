@@ -197,5 +197,23 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Faulty bearing",
     "condition": "Under Maintenance"
+  },
+  {
+    "recordId": "NWSC-GGABA-P-0004",
+    "entryDate": "2026-08-22",
+    "assetNumber": "011",
+    "serialNumber": "1930",
+    "pumpManufacturer": "Krones",
+    "pumpModel": "K200",
+    "pumpType": "Centrifugal",
+    "pumpCapacity": "90",
+    "motorRating": "7.5",
+    "motorSerialNumber": "19304",
+    "station": "Ggaba",
+    "location": "Treatment",
+    "deliveredBy": "Luts",
+    "dateReceived": "2026-08-22",
+    "faultReported": "Seal",
+    "condition": "Under Repair"
   }
 ]
