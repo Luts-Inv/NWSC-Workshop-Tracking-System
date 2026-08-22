@@ -125,5 +125,23 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Bearing failure",
     "condition": "In Service"
+  },
+  {
+    "recordId": "NWSC-GGABA-P-1787055334290",
+    "entryDate": "2026-08-22",
+    "assetNumber": "0002",
+    "serialNumber": "SN1001",
+    "pumpManufacturer": "Alfa laval",
+    "pumpModel": "400400",
+    "pumpType": "Submersible",
+    "pumpCapacity": "150",
+    "motorRating": "10",
+    "motorSerialNumber": "200200",
+    "station": "Ggaba",
+    "location": "Infeed station",
+    "deliveredBy": "Irene",
+    "dateReceived": "2026-08-22",
+    "faultReported": "Impeller damage",
+    "condition": "In Service"
   }
 ]
