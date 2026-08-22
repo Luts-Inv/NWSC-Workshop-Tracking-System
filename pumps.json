@@ -179,5 +179,23 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Seal",
     "condition": "Under Maintenance"
+  },
+  {
+    "recordId": "NWSC-BANDA-P-0001",
+    "entryDate": "2026-08-22",
+    "assetNumber": "010",
+    "serialNumber": "1730",
+    "pumpManufacturer": "Alfa laval",
+    "pumpModel": "1583",
+    "pumpType": "Submersible",
+    "pumpCapacity": "169",
+    "motorRating": "45",
+    "motorSerialNumber": "3549",
+    "station": "Banda",
+    "location": "Pump house",
+    "deliveredBy": "Ernest",
+    "dateReceived": "2026-08-22",
+    "faultReported": "Faulty bearing",
+    "condition": "Under Maintenance"
   }
 ]
