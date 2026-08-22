@@ -17,5 +17,23 @@
     "dateReceived": "2026-08-22",
     "faultReported": "None",
     "condition": "Under Maintenance"
+  },
+  {
+    "recordId": "NWSC-LUGOG-P-0000",
+    "entryDate": "2026-08-22",
+    "assetNumber": "002",
+    "serialNumber": "SN23093",
+    "pumpManufacturer": "Alfa laval",
+    "pumpModel": "20022",
+    "pumpType": "Submersible",
+    "pumpCapacity": "200",
+    "motorRating": "12",
+    "motorSerialNumber": "1009001",
+    "station": "Lugogo",
+    "location": "Infeed station",
+    "deliveredBy": "Amidi",
+    "dateReceived": "2026-08-22",
+    "faultReported": "Impeller damage",
+    "condition": "Under Repair"
   }
 ]
