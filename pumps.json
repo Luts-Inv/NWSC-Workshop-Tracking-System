@@ -269,5 +269,23 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Inpeller",
     "condition": "In Service"
+  },
+  {
+    "recordId": "NWSC-GGABA-P-0008",
+    "entryDate": "2026-08-22",
+    "assetNumber": "2738",
+    "serialNumber": "5728",
+    "pumpManufacturer": "Alfa",
+    "pumpModel": "2538",
+    "pumpType": "Centrifugal",
+    "pumpCapacity": "15",
+    "motorRating": "5",
+    "motorSerialNumber": "25738",
+    "station": "Ggaba",
+    "location": "Chemical dosing",
+    "deliveredBy": "Scof",
+    "dateReceived": "2026-08-22",
+    "faultReported": "2538",
+    "condition": "Under Repair"
   }
 ]
