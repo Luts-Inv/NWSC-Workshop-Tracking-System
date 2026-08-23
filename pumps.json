@@ -287,23 +287,5 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Seal",
     "condition": "In Service"
-  },
-  {
-    "recordId": "NWSC-KIREK-P-0003",
-    "entryDate": "2026-08-23",
-    "assetNumber": "0020",
-    "serialNumber": "245",
-    "pumpManufacturer": "Grundfos",
-    "pumpModel": "G23",
-    "pumpType": "Centrifugal",
-    "pumpCapacity": "50",
-    "motorRating": "8",
-    "motorSerialNumber": "56897",
-    "station": "Kireka",
-    "location": "Pump house",
-    "deliveredBy": "Martin",
-    "dateReceived": "2026-08-23",
-    "faultReported": "Shaft misalignment",
-    "condition": "Under Repair"
   }
 ]
