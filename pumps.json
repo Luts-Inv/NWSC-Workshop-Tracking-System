@@ -53,23 +53,5 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Bearing",
     "condition": "In Service"
-  },
-  {
-    "recordId": "NWSC-KIREK-P-0001",
-    "entryDate": "2026-08-22",
-    "assetNumber": "006",
-    "serialNumber": "29476",
-    "pumpManufacturer": "Alfa Laval",
-    "pumpModel": "76839",
-    "pumpType": "Centrifugal",
-    "pumpCapacity": "160",
-    "motorRating": "16",
-    "motorSerialNumber": "1839",
-    "station": "Kireka",
-    "location": "Pump house",
-    "deliveredBy": "Scof",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Impeller",
-    "condition": "Out of Service"
   }
 ]
