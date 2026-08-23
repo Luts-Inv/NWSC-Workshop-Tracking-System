@@ -145,24 +145,6 @@
     "condition": "Out of Service"
   },
   {
-    "recordId": "NWSC-GGABA-P-0003",
-    "entryDate": "2026-08-22",
-    "assetNumber": "009",
-    "serialNumber": "0956",
-    "pumpManufacturer": "Genesys",
-    "pumpModel": "09667",
-    "pumpType": "Centrifugal",
-    "pumpCapacity": "200",
-    "motorRating": "15",
-    "motorSerialNumber": "56007",
-    "station": "Ggaba",
-    "location": "Water treatment",
-    "deliveredBy": "Scof",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Mechanical seal",
-    "condition": "Out of Service"
-  },
-  {
     "recordId": "NWSC-GGABA-P-0006",
     "entryDate": "2026-08-22",
     "assetNumber": "003",
