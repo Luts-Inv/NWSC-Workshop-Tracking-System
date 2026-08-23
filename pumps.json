@@ -163,24 +163,6 @@
     "condition": "Out of Service"
   },
   {
-    "recordId": "NWSC-BANDA-P-0000",
-    "entryDate": "2026-08-22",
-    "assetNumber": "009",
-    "serialNumber": "20002",
-    "pumpManufacturer": "Alfa laval",
-    "pumpModel": "A2008",
-    "pumpType": "Centrifugal",
-    "pumpCapacity": "170",
-    "motorRating": "50",
-    "motorSerialNumber": "S6892",
-    "station": "Banda",
-    "location": "Booster",
-    "deliveredBy": "Ernest",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Seal",
-    "condition": "Under Maintenance"
-  },
-  {
     "recordId": "NWSC-BANDA-P-0001",
     "entryDate": "2026-08-22",
     "assetNumber": "010",
