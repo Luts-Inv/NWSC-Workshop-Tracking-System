@@ -233,23 +233,5 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Seal",
     "condition": "Under Repair"
-  },
-  {
-    "recordId": "NWSC-GGABA-P-0007",
-    "entryDate": "2026-08-22",
-    "assetNumber": "12",
-    "serialNumber": "R273",
-    "pumpManufacturer": "Alfa laval",
-    "pumpModel": "A299",
-    "pumpType": "Booster",
-    "pumpCapacity": "",
-    "motorRating": "50",
-    "motorSerialNumber": "35tyg5",
-    "station": "Ggaba",
-    "location": "Pump house",
-    "deliveredBy": "Luts",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Inpeller",
-    "condition": "In Service"
   }
 ]
