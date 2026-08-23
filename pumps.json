@@ -127,24 +127,6 @@
     "condition": "Out of Service"
   },
   {
-    "recordId": "NWSC-KIREK-P-0002",
-    "entryDate": "2026-08-22",
-    "assetNumber": "88",
-    "serialNumber": "283",
-    "pumpManufacturer": "Grundfos",
-    "pumpModel": "3849",
-    "pumpType": "Centrifugal",
-    "pumpCapacity": "69",
-    "motorRating": "9645",
-    "motorSerialNumber": "1738",
-    "station": "Kireka",
-    "location": "Booster",
-    "deliveredBy": "Scof",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Motor",
-    "condition": "Out of Service"
-  },
-  {
     "recordId": "NWSC-GGABA-P-0006",
     "entryDate": "2026-08-22",
     "assetNumber": "003",
