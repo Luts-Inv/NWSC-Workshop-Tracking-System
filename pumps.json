@@ -37,24 +37,6 @@
     "condition": "Under Repair"
   },
   {
-    "recordId": "NWSC-GGABA-P-0001",
-    "entryDate": "2026-08-22",
-    "assetNumber": "003",
-    "serialNumber": "27893",
-    "pumpManufacturer": "Alfa Laval",
-    "pumpModel": "65214",
-    "pumpType": "Submersible",
-    "pumpCapacity": "200",
-    "motorRating": "200",
-    "motorSerialNumber": "45738",
-    "station": "Ggaba",
-    "location": "Booster",
-    "deliveredBy": "Scof",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Seal",
-    "condition": "Under Maintenance"
-  },
-  {
     "recordId": "NWSC-KIREK-P-0000",
     "entryDate": "2026-08-22",
     "assetNumber": "003",
