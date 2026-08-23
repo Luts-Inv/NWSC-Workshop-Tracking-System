@@ -73,24 +73,6 @@
     "condition": "In Service"
   },
   {
-    "recordId": "NWSC-BUGOL-P-0000",
-    "entryDate": "2026-08-22",
-    "assetNumber": "005",
-    "serialNumber": "20220",
-    "pumpManufacturer": "Hlx",
-    "pumpModel": "H20440",
-    "pumpType": "Submersible",
-    "pumpCapacity": "120",
-    "motorRating": "15",
-    "motorSerialNumber": "13894",
-    "station": "Bugolobi",
-    "location": "Pump house",
-    "deliveredBy": "Scof",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Bearing",
-    "condition": "Under Repair"
-  },
-  {
     "recordId": "NWSC-KIREK-P-0001",
     "entryDate": "2026-08-22",
     "assetNumber": "006",
