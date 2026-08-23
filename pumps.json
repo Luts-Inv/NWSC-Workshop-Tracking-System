@@ -71,23 +71,5 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Impeller",
     "condition": "Out of Service"
-  },
-  {
-    "recordId": "NWSC-GGABA-P-0002",
-    "entryDate": "2026-08-22",
-    "assetNumber": "006",
-    "serialNumber": "27893",
-    "pumpManufacturer": "Alfa Laval",
-    "pumpModel": "10021",
-    "pumpType": "Centrifugal",
-    "pumpCapacity": "200",
-    "motorRating": "45",
-    "motorSerialNumber": "456861",
-    "station": "Ggaba",
-    "location": "Booster",
-    "deliveredBy": "Scof",
-    "dateReceived": "2026-08-22",
-    "faultReported": "Seal",
-    "condition": "Out of Service"
   }
 ]
