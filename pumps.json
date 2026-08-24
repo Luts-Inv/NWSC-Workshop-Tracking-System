@@ -53,5 +53,23 @@
     "dateReceived": "2026-08-22",
     "faultReported": "Bearing",
     "condition": "In Service"
+  },
+  {
+    "recordId": "NWSC-NAKAW-P-0000",
+    "entryDate": "2026-08-21",
+    "assetNumber": "004",
+    "serialNumber": "268300",
+    "pumpManufacturer": "Prominent",
+    "pumpModel": "psed56",
+    "pumpType": "Centrifugal",
+    "pumpCapacity": "20",
+    "motorRating": "5",
+    "motorSerialNumber": "45738",
+    "station": "Nakawa",
+    "location": "Water treatment",
+    "deliveredBy": "Moses",
+    "dateReceived": "2026-08-24",
+    "faultReported": "Diaphram damage",
+    "condition": "Out of Service"
   }
 ]
