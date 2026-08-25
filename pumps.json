@@ -71,5 +71,23 @@
     "dateReceived": "2026-08-24",
     "faultReported": "Diaphram damage",
     "condition": "Out of Service"
+  },
+  {
+    "recordId": "NWSC-KATOS-P-0000",
+    "entryDate": "2026-08-25",
+    "assetNumber": "005",
+    "serialNumber": "Sn2000",
+    "pumpManufacturer": "Grundfos",
+    "pumpModel": "G100",
+    "pumpType": "Submersible",
+    "pumpCapacity": "150",
+    "motorRating": "15",
+    "motorSerialNumber": "2500",
+    "station": "Katosi",
+    "location": "Infeed",
+    "deliveredBy": "Scof",
+    "dateReceived": "2026-08-25",
+    "faultReported": "Impeller damage",
+    "condition": "Out of Service"
   }
 ]
