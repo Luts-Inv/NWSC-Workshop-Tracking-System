@@ -89,5 +89,23 @@
     "dateReceived": "2026-08-25",
     "faultReported": "Impeller damage",
     "condition": "Out of Service"
+  },
+  {
+    "recordId": "NWSC-MUTUN-P-0000",
+    "entryDate": "2026-08-21",
+    "assetNumber": "007",
+    "serialNumber": "00131465",
+    "pumpManufacturer": "Alfa Laval",
+    "pumpModel": "a2002",
+    "pumpType": "Centrifugal",
+    "pumpCapacity": "50",
+    "motorRating": "20",
+    "motorSerialNumber": "45738",
+    "station": "Mutungo",
+    "location": "Booster",
+    "deliveredBy": "Scof",
+    "dateReceived": "2026-08-20",
+    "faultReported": "Impeller damage",
+    "condition": "Under Maintenance"
   }
 ]
